@@ -1,6 +1,6 @@
 package cantinho.controllers;
 
-public interface IRadar extends ICore {
+public interface IGun extends ICore {
 
     void turnRadarRight(final double degrees);
 
