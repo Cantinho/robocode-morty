@@ -17,7 +17,6 @@ import static robocode.util.Utils.normalAbsoluteAngle;
 import static robocode.util.Utils.normalRelativeAngle;
 
 public class MortyRobot extends Interactive implements IRadar {
-
     private RadarController radarController = new RadarController(this);
 
     private void init() {
