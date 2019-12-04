@@ -9,32 +9,32 @@ import static robocode.util.Utils.normalRelativeAngle;
 
 public class GunController {
 
-    final IGun radar;
+    final IGun gun;
 
     private boolean isTracking = false;
 
     // The coordinate of the radar target (x,y)
     int radarTargetX, radarTargetY = Integer.MIN_VALUE;
 
-    public GunController(final IGun radar) {
-        this.radar = radar;
+    public GunController(final IGun gun) {
+        this.gun = gun;
     }
 
     public void init() {
-        radar.turnRadarRight(360);
+        gun.turnGunRight(360);
     }
 
     public void run() {
         // Turns the radar toward the current radar target coordinate (x,y) controlled by
         // the current mouse coordinate
-        double radarTargetAngle = normalAbsoluteAngle(Math.atan2(radarTargetX - radar.getX(), radarTargetY - radar.getY()));
+        double gunTargetAngle = normalAbsoluteAngle(Math.atan2(radarTargetX - gun.getX(), radarTargetY - gun.getY()));
 
-        radar.setTurnRadarRightRadians(normalRelativeAngle(radarTargetAngle - radar.getRadarHeadingRadians()));
+        gun.setTurnGunRightRadians(normalRelativeAngle(gunTargetAngle - gun.getGunHeadingRadians()));
     }
 
     public void onHitByBullet(final HitByBulletEvent event) {
         if(!isTracking) {
-            radar.turnRadarRight(360);
+            gun.turnGunRight(360);
         }
     }
 
@@ -43,11 +43,11 @@ public class GunController {
             isTracking = true;
         }
         // Calculate the angle to the scanned robot
-        double angle = Math.toRadians((radar.getHeading() + event.getBearing()) % 360);
+        double angle = Math.toRadians((gun.getHeading() + event.getBearing()) % 360);
 
         // Calculate the coordinates of the robot
-        radarTargetX = (int)(radar.getX() + Math.sin(angle) * event.getDistance());
-        radarTargetY = (int)(radar.getY() + Math.cos(angle) * event.getDistance());
+        radarTargetX = (int)(gun.getX() + Math.sin(angle) * event.getDistance());
+        radarTargetY = (int)(gun.getY() + Math.cos(angle) * event.getDistance());
     }
 
 }
