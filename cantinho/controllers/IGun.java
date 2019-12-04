@@ -2,9 +2,9 @@ package cantinho.controllers;
 
 public interface IGun extends ICore {
 
-    void turnRadarRight(final double degrees);
+    void turnGunRight(final double degrees);
 
-    void setTurnRadarRightRadians(final double radians);
+    void setTurnGunRightRadians(final double radians);
 
-    double getRadarHeadingRadians();
+    double getGunHeadingRadians();
 }

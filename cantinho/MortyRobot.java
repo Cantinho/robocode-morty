@@ -1,6 +1,8 @@
 package cantinho;
 
+import cantinho.controllers.IGun;
 import cantinho.controllers.IRadar;
+import cantinho.controllers.gun.GunController;
 import cantinho.controllers.radar.RadarController;
 import cantinho.samples.Interactive;
 import robocode.HitByBulletEvent;
@@ -16,13 +18,16 @@ import static java.awt.event.KeyEvent.VK_A;
 import static robocode.util.Utils.normalAbsoluteAngle;
 import static robocode.util.Utils.normalRelativeAngle;
 
-public class MortyRobot extends Interactive implements IRadar {
+public class MortyRobot extends Interactive implements IRadar, IGun {
+
     private RadarController radarController = new RadarController(this);
+    private GunController gunController = new GunController(this);
 
     private void init() {
         // Set radar to turn independent from the gun's turn
         setAdjustRadarForGunTurn(true);
         radarController.init();
+        gunController.init();
     }
 
     // Move direction: 1 = move forward, 0 = stand still, -1 = move backward
@@ -74,6 +79,7 @@ public class MortyRobot extends Interactive implements IRadar {
             }
 
             radarController.run();
+            gunController.run();
 
             // Execute all pending set-statements
             execute();
@@ -191,11 +197,13 @@ public class MortyRobot extends Interactive implements IRadar {
     public void onScannedRobot(ScannedRobotEvent event) {
         super.onScannedRobot(event);
         radarController.onScannedRobot(event);
+        gunController.onScannedRobot(event);
     }
 
     @Override
     public void onHitByBullet(HitByBulletEvent event) {
         super.onHitByBullet(event);
         radarController.onHitByBullet(event);
+        gunController.onHitByBullet(event);
     }
 }
