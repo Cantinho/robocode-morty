@@ -18,9 +18,9 @@ public class SimpleAiming implements IAimStrategy {
     }
 
     @Override
-    public void aim(ScannedRobotEvent event) {
+    public void aim(final ScannedRobotEvent event) {
         // Calculate the angle to the scanned robot
-        double angle = Math.toRadians((gun.getHeading() + event.getBearing()) % 360);
+        final double angle = Math.toRadians((gun.getHeading() + event.getBearing()) % 360);
 
         // Calculate the coordinates of the robot
         gunTargetX = (int)(gun.getX() + Math.sin(angle) * event.getDistance());
