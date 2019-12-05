@@ -67,11 +67,7 @@ public class MortyRobot extends Interactive implements IRadar, IGun {
             // stop turning depending on the turn direction
             setTurnRight(45 * turnDirection); // degrees
 
-            // Turns the gun toward the current aim coordinate (x,y) controlled by
-            // the current mouse coordinate
-            double angle = normalAbsoluteAngle(Math.atan2(aimX - getX(), aimY - getY()));
 
-            setTurnGunRightRadians(normalRelativeAngle(angle - getGunHeadingRadians()));
 
             // Fire the gun with the specified fire power, unless the fire power = 0
             if (firePower > 0) {

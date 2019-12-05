@@ -14,7 +14,7 @@ public class GunController {
     private boolean isTracking = false;
 
     // The coordinate of the radar target (x,y)
-    int radarTargetX, radarTargetY = Integer.MIN_VALUE;
+    int gunTargetX, gunTargetY = Integer.MIN_VALUE;
 
     public GunController(final IGun gun) {
         this.gun = gun;
@@ -25,11 +25,11 @@ public class GunController {
     }
 
     public void run() {
-        // Turns the radar toward the current radar target coordinate (x,y) controlled by
+        // Turns the gun toward the current aim coordinate (x,y) controlled by
         // the current mouse coordinate
-        double gunTargetAngle = normalAbsoluteAngle(Math.atan2(radarTargetX - gun.getX(), radarTargetY - gun.getY()));
+        double angle = normalAbsoluteAngle(Math.atan2(gunTargetX - gun.getX(), gunTargetY - gun.getY()));
 
-        gun.setTurnGunRightRadians(normalRelativeAngle(gunTargetAngle - gun.getGunHeadingRadians()));
+        gun.setTurnGunRightRadians(normalRelativeAngle(angle - gun.getGunHeadingRadians()));
     }
 
     public void onHitByBullet(final HitByBulletEvent event) {
@@ -46,8 +46,8 @@ public class GunController {
         double angle = Math.toRadians((gun.getHeading() + event.getBearing()) % 360);
 
         // Calculate the coordinates of the robot
-        radarTargetX = (int)(gun.getX() + Math.sin(angle) * event.getDistance());
-        radarTargetY = (int)(gun.getY() + Math.cos(angle) * event.getDistance());
+        gunTargetX = (int)(gun.getX() + Math.sin(angle) * event.getDistance());
+        gunTargetY = (int)(gun.getY() + Math.cos(angle) * event.getDistance());
     }
 
 }
