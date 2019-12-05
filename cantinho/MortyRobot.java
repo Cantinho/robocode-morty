@@ -1,8 +1,10 @@
 package cantinho;
 
+import cantinho.controllers.IAimStrategy;
 import cantinho.controllers.IGun;
 import cantinho.controllers.IRadar;
 import cantinho.controllers.gun.GunController;
+import cantinho.controllers.gun.PredictiveLinearAiming;
 import cantinho.controllers.gun.SimpleAiming;
 import cantinho.controllers.radar.RadarController;
 import cantinho.samples.Interactive;
@@ -20,7 +22,9 @@ import static java.awt.event.KeyEvent.VK_A;
 public class MortyRobot extends Interactive implements IRadar, IGun {
 
     private RadarController radarController = new RadarController(this);
-    private GunController gunController = new GunController(this, new SimpleAiming(this));
+    final PredictiveLinearAiming predictiveLinearAiming = new PredictiveLinearAiming(this);
+    private GunController gunController = new GunController(this, predictiveLinearAiming);
+
 
     private void init() {
         // Set radar to turn independent from the gun's turn
@@ -165,12 +169,14 @@ public class MortyRobot extends Interactive implements IRadar, IGun {
             firePower = 1;
             setBulletColor(Color.YELLOW);
         }
+        predictiveLinearAiming.setFirePower(firePower);
     }
 
     // Called when a mouse button has been released (after being pressed)
     public void onMouseReleased(MouseEvent e) {
         // Fire power = 0, which means "don't fire"
         firePower = 0;
+        predictiveLinearAiming.setFirePower(firePower);
     }
 
     // Called in order to paint graphics for this robot.
