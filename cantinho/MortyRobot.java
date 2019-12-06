@@ -5,6 +5,7 @@ import cantinho.controllers.IGun;
 import cantinho.controllers.IRadar;
 import cantinho.controllers.gun.GunController;
 import cantinho.controllers.gun.PredictiveLinearAiming;
+import cantinho.controllers.gun.PredictiveLinearRandomDirectionAiming;
 import cantinho.controllers.gun.SimpleAiming;
 import cantinho.controllers.radar.RadarController;
 import cantinho.samples.Interactive;
@@ -22,7 +23,7 @@ import static java.awt.event.KeyEvent.VK_A;
 public class MortyRobot extends Interactive implements IRadar, IGun {
 
     private RadarController radarController = new RadarController(this);
-    final PredictiveLinearAiming predictiveLinearAiming = new PredictiveLinearAiming(this);
+    final PredictiveLinearRandomDirectionAiming predictiveLinearAiming = new PredictiveLinearRandomDirectionAiming(this);
     private GunController gunController = new GunController(this, predictiveLinearAiming);
 
 
