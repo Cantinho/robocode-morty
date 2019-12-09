@@ -51,5 +51,13 @@ public class PredictiveLinearAiming implements IAimStrategy {
         double newAngle = normalAbsoluteAngle(Math.atan2(predictedX - gun.getX(), predictedY - gun.getY()));
 
         gun.setTurnGunRightRadians(normalRelativeAngle(newAngle - gun.getGunHeadingRadians()));
+
+        fire();
+    }
+
+    private void fire() {
+        if(getFirePower() > 0) {
+            gun.setFire(getFirePower());
+        }
     }
 }

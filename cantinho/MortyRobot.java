@@ -71,12 +71,12 @@ public class MortyRobot extends Interactive implements IRadar, IGun {
 
 
             // Fire the gun with the specified fire power, unless the fire power = 0
-            if (firePower > 0) {
-                setFire(firePower);
-            }
+//            if (firePower > 0) {
+//                setFire(firePower);
+//            }
 
             radarController.run();
-            //gunController.run();
+            gunController.run();
 
             // Execute all pending set-statements
             execute();
