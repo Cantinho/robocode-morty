@@ -7,4 +7,6 @@ public interface IGun extends ICore {
     void setTurnGunRightRadians(final double radians);
 
     double getGunHeadingRadians();
+
+    void setFire(double firePower);
 }
